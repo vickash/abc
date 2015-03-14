@@ -1,0 +1,108 @@
+# ATMega328p ONLY products
+-
+  name:  'uno'
+  value: 'arduino:avr:uno'
+-
+  name:  'fio'
+  value: 'arduino:avr:fio'
+-
+  name:  'ethernet'
+  value: 'arduino:avr:ethernet'
+-
+  name:  'lily_pad_usb'
+  value: 'arduino:avr:LilyPadUSB'
+
+# ATmega328p versions of products with 328 & 168 versions
+-
+  name:  'lilypad'
+  value: 'arduino:avr:lilypad'
+-
+  name:  'bt'
+  value: 'arduino:avr:bt'
+-
+  name:  'nano'
+  value: 'arduino:avr:nano'
+-
+  name:  'diecimila'
+  value: 'arduino:avr:diecimila'
+-
+  name:  'duemilanove'
+  value: 'arduino:avr:diecimila'
+-
+  name:  'mini'
+  value: 'arduino:avr:mini'
+
+# ATmega168p versions of products with 328 & 168 versions
+-
+  name:  'lilypad_atmega168'
+  value: 'arduino:avr:lilypad:cpu=atmega168'
+-
+  name:  'bt_atmega168'
+  value: 'arduino:avr:bt:cpu=atmega168'
+-
+  name:  'nano_atmega168'
+  value: 'arduino:avr:nano:cpu=atmega168'
+-
+  name:  'diecimila_atmega168'
+  value: 'arduino:avr:diecimila:cpu=atmega168'
+-
+  name:  'duemilanove_atmega168'
+  value: 'arduino:avr:diecimila:cpu=atmega168'
+-
+  name:  'mini_atmega168'
+  value: 'arduino:avr:mini:cpu=atmega168'
+
+# Pro/Pro Mini 328/168 @ 8Mhz3V3/16Mhz5V
+-
+  name:  'pro_promini_16mhz_atmega328'
+  value: 'arduino:avr:pro:cpu=16MHzatmega328'
+-
+  name:  'pro_promini_8mhz_atmega328'
+  value: 'arduino:avr:pro:cpu=8MHzatmega328'
+-
+  name:  'pro_promini_16mhz_atmega168'
+  value: 'arduino:avr:pro:cpu=16MHzatmega168'
+-
+  name:  'pro_promini_8mhz_atmega168'
+  value: 'arduino:avr:pro:cpu=8MHzatmega168'
+
+# ATmega168 ONLY products
+-
+  name:  'ng'
+  value: 'arduino:avr:atmegang'
+
+# ATmega32u4 based products
+-
+  name:  'leonardo'
+  value: 'arduino:avr:leonardo'
+-
+  name:  'yun'
+  value: 'arduino:avr:yun'
+-
+  name:  'esplora'
+  value: 'arduino:avr:esplora'
+-
+  name:  'micro'
+  value: 'arduino:avr:micro'
+-
+  name:  'robot_motor'
+  value: 'arduino:avr:robotMotor'
+-
+  name:  'robot_control'
+  value: 'arduino:avr:robotControl'
+
+# Mega products
+-
+  name:  'mega_1280'
+  value: 'arduino:avr:mega:cpu=atmega1280'
+-
+  name:  'mega_2560'
+  value: 'arduino:avr:mega'
+-
+  name:  'mega_adk'
+  value: 'arduino:avr:megaADK'
+
+# Arduino Due
+-
+  name:  'due'
+  value: 'arduino:sam:arduino_due_x'

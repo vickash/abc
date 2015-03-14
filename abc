@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+
+require "methadone"
+require "colorize"
+require 'yaml'
+require "fileutils"
+include Methadone::Main
+include Methadone::CLILogging
+
+# Load the board configurations
+boards = YAML.load_file('boards.yml')
+
+# Basic info
+version     '0.1.0'
+description "Arduino Batch Compiler\n\nComple a sketch file for all Arduino products at once.\nRequires the Arduino IDE (1.6.0 or later) to be installed."
+
+# Try to automatically find the Arduino IDE Java executable
+def find_executable
+  if RUBY_PLATFORM.match /darwin/i
+    "/Applications/Arduino.app/Contents/MacOS/JavaApplicationStub"
+  elsif RUBY_PLATFORM.match /mswin|mingw/i
+    "C:\\Program Files\\Arduino\\arduino.exe"
+  else
+    path = `which arduino`
+    if path.empty?
+      raise "ERROR: Can't automatically find Arduino executable. Specify path with --executable."
+    else
+      return path
+    end
+  end
+end
+
+# Convert any path to absolute, and raise if it does not exist.
+require "pathname"
+def abs(path, options={})
+  begin
+    (Pathname.new path).realpath.to_s
+  rescue
+    raise("ERROR: #{options[:error]}")
+  end
+end
+
+# Arguments and options
+arg :sketch, :required
+options['output-dir'] = Dir.pwd
+options['executable'] = find_executable
+
+# Help setup
+on("-e PATH","--executable","Path to the Arduino IDE executable / Java Stub (OS X)")
+on("-o PATH","--output-dir","Where to put the compiled binaries when done")
+
+# Main script
+main do |sketch|
+  # Check all the paths
+  sketch_path = abs sketch,
+                error: "Sketch file does not exist."
+  output_path = abs options['output-dir'],
+                error: "Output directory does not exist."
+  executable  = abs options['executable'],
+                error: "Invalid path for Arduino executable"
+  sketch_name = File.basename(sketch_path, ".*")
+
+  boards.each do |board|
+    print "Compiling for #{board['name']}..."
+    output = `#{executable} --verify --verbose --board #{board['value']} '#{sketch_path}' 2>&1`
+
+    begin
+      if output.match /RunnerException: Sketch too big/
+        puts "Failed (sketch too big for board's flash memory)".red
+      else
+        binary = output.match(/(elf)\s(.*(bin|hex))/i)[2]
+        extension = binary.split(//).last(3).join
+        FileUtils::copy(binary, "#{output_path}/#{sketch_name}_#{board['name']}.#{extension}")
+        puts "OK".green
+      end
+    rescue
+      puts "Failed to compile".red
+    end
+  end
+end
+
+go!

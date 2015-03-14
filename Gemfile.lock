@@ -1,0 +1,12 @@
+GEM
+  specs:
+    colorize (0.7.5)
+    methadone (1.9.0)
+      bundler
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  colorize
+  methadone
